@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:latihan_sqflite/app/modules/add_note/bindings/add_note_binding.dart';
+import 'package:latihan_sqflite/app/modules/add_note/views/add_note_view.dart';
 import 'package:latihan_sqflite/app/modules/home/bindings/home_binding.dart';
 import 'package:latihan_sqflite/app/modules/home/views/home_view.dart';
 
@@ -15,6 +17,11 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_NOTE,
+      page: () => AddNoteView(),
+      binding: AddNoteBinding(),
     ),
   ];
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:latihan_sqflite/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -9,14 +10,25 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HomeView'),
+        title: Text('ALL NOTES'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: CircleAvatar(
+                child: Text("${index + 1}"),
+              ),
+              title: Text("Data ${index + 1}"),
+              subtitle: Text("Deskripsi ${index + 1}"),
+            );
+          }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed(Routes.ADD_NOTE);
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
