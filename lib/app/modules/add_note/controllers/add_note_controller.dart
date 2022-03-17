@@ -17,13 +17,17 @@ class AddNoteController extends GetxController {
     if (titleC.text.isNotEmpty && descC.text.isNotEmpty) {
       isLoading.value = true;
       Database db = await database.db;
-      await db.insert('notes', {
-        'id': Random().nextInt(1000),
-        'title': titleC.text,
-        'desc': descC.text,
-      });
+      await db.insert(
+        'notes',
+        {
+          // 'id': Random().nextInt(1000),
+          'title': titleC.text,
+          'desc': descC.text,
+        },
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
       isLoading.value = false;
-      Get.back();
+    
     }
   }
 }

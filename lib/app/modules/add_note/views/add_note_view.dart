@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/add_note_controller.dart';
+import '../../home/controllers/home_controller.dart';
 
 class AddNoteView extends GetView<AddNoteController> {
+  final HomeController homeC = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,22 +39,27 @@ class AddNoteView extends GetView<AddNoteController> {
             ),
           ),
           SizedBox(height: 20),
-          Obx(() => ElevatedButton.icon(
-                onPressed: () {
-                  if (controller.isLoading.isFalse) {
-                    controller.addNote();
-                  }
-                },
-                icon: Icon(Icons.save),
-                label: Text(controller.isLoading.isFalse ? "ADD NOTES" : "Loading..."),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red[900],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  fixedSize: Size(120, 50),
+          Obx(
+            () => ElevatedButton.icon(
+              onPressed: () async {
+                if (controller.isLoading.isFalse) {
+                  controller.addNote();
+                  await homeC.getAllNotes();
+                  Get.back();
+                }
+              },
+              icon: Icon(Icons.save),
+              label: Text(
+                  controller.isLoading.isFalse ? "ADD NOTES" : "Loading..."),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red[900],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
                 ),
-              )),
+                fixedSize: Size(120, 50),
+              ),
+            ),
+          ),
         ],
       ),
     );
